@@ -1,0 +1,23 @@
+# Compiled Outputs
+/dist
+/tmp
+
+# Dependencies
+/node_modules
+
+# IDEs and Editors
+/.idea
+/.vscode
+
+# Misc.
+/typings
+.env
+npm-debug.log
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Test Reports
+/coverage
+junit.xml
