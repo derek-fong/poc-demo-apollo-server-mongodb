@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - release
   pull_request:
     branches:
       - '**'
@@ -89,8 +88,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
       - name: Run Semantic Release
         env:
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
