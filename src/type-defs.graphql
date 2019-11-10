@@ -1,0 +1,58 @@
+input AdditionalEntityFields {
+  path: String!
+  type: String!
+}
+
+directive @column(overrideType: String) on FIELD_DEFINITION
+directive @entity(
+  embedded: Boolean
+  additionalFields: [AdditionalEntityFields]
+) on OBJECT
+directive @id on FIELD_DEFINITION
+directive @link(overrideType: String) on FIELD_DEFINITION
+
+scalar DateTime
+scalar EmailAddress
+
+type User @entity {
+  id: ID! @id
+  firstName: String! @column
+  lastName: String! @column
+  emailAddress: EmailAddress! @column(overrideType: "string")
+  posts: [Post]
+  follwers: [User]
+  following: [User] @link
+}
+
+type Post @entity {
+  id: ID! @id
+  title: String! @column
+  content: String! @column
+  createdAt: DateTime! @column
+  createdBy: User! @link
+  likedBy: [User] @link
+}
+
+input AddPostInput {
+  title: String!
+  content: String!
+}
+
+type Query {
+  """
+  Get post by ID.
+  """
+  post(id: ID!): Post
+
+  """
+  Get posts created by user.
+  """
+  postByUser(userId: ID!): [Post]
+}
+
+type Mutation {
+  """
+  Add post.
+  """
+  addPost(input: AddPostInput!): Post!
+}

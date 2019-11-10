@@ -5,6 +5,9 @@
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.$NODE_ENV.js",
+    "graphql:codegen": "graphql codegen",
+    "prebuild": "npm run graphql:codegen",
+    "pretest": "npm run graphql:codegen",
     "start": "node dist/server",
     "start:env": "node --require dotenv/config dist/server",
     "test": "jest"
@@ -16,13 +19,19 @@
   },
   "homepage": "https://github.com/derek-fong/poc-demo-apollo-server-mongodb#readme",
   "dependencies": {
+    "@graphql-codegen/typescript-mongodb": "^1.8.3",
     "apollo-server": "^2.9.7",
-    "graphql": "^14.5.8"
+    "graphql": "^14.5.8",
+    "graphql-scalars": "^1.0.4",
+    "mongodb": "^3.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@graphql-codegen/typescript": "^1.8.3",
+    "@test-graphql-cli/codegen": "^4.0.0-alpha.26",
     "@types/jest": "^24.0.21",
+    "@types/mongodb": "^3.3.10",
     "@types/webpack-env": "^1.14.1",
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "@typescript-eslint/parser": "^2.6.0",
@@ -32,6 +41,7 @@
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "graphql-cli": "^2.2.1-alpha-e23f6ab.408",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
     "jest-junit": "^9.0.0",
